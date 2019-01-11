@@ -12,6 +12,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 import time
 import os
 
+pewdsShouldShoot=False
+
 ONLY_PEWDS = 1
 NEUTRAL=0
 ONLY_TSERIES = 2
@@ -25,15 +27,6 @@ mixer.init()
 def playSound(name):
     mixer.music.load(os.path.dirname(__file__)+'/'+name)
     mixer.music.play()
-
-
-# import pyttsx3
-# engine = pyttsx3.init();
-# voices = engine.getProperty('voices')
-# for voice in voices:
-#    engine.setProperty('voice', voice.id)
-#    engine.say('The quick brown fox jumped over the lazy dog.')
-# engine.runAndWait()
 
 # The CLIENT_SECRETS_FILE variable specifies the name of a file that contains
 # the OAuth 2.0 information for this application, including its client_id and
@@ -133,15 +126,17 @@ if __name__ == '__main__':
         
         elif(state==NEUTRAL):
             playSound('Turret_turret_deploy_3.wav')
-            
+            pewdsShouldShoot = True
             state = ONLY_TSERIES
             print("ONLY TSERIES")
     elif "PewDiePie" in str(response):
         if(state == ONLY_TSERIES):
                     state = NEUTRAL
                     print("No TSERIES")
+                    pewdsShouldShoot = False
                     playSound('Turret_turret_retire_2.wav')
-
+    else:
+        print("NEUTRAL")
         
         
     time.sleep(1)

@@ -84,7 +84,10 @@ if (Serial.available() > 0) {
           vertStepper.moveTo(yCenter);
           horStepper.moveTo(xCenter);
         }
-        
+        if(dir=='Z'){
+          vertStepper.moveTo(yCenter+700);
+          horStepper.moveTo(xCenter);
+        }
         
 }
 
